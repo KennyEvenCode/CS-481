@@ -1,5 +1,6 @@
 package com.example.notifications_and_workmanager
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -21,7 +22,6 @@ class MainActivity : AppCompatActivity() {
             sendNotification()
         }
     }
-
     private fun createNotificationChannel() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel:NotificationChannel = NotificationChannel("C10", "Title", NotificationManager.IMPORTANCE_DEFAULT).apply {
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             notificationManager.createNotificationChannel(channel)
         }
     }
-
+    @SuppressLint("MissingPermission")
     private fun sendNotification() {
         val title = findViewById<EditText>(R.id.etTitle).text.toString()
         val message = findViewById<EditText>(R.id.etMessage).text.toString()
@@ -45,7 +45,6 @@ class MainActivity : AppCompatActivity() {
             notify(10, builder.build())
         }
     }
-
     private fun showAlert(title: String, message: String) {
         AlertDialog.Builder(this)
             .setTitle("You will see the following title and message as a notification")
